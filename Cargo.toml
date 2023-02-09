@@ -4,7 +4,7 @@ description = "An activity pub feed reader for the command line"
 homepage = "https://github.com/esmevane/apread"
 repository = "https://github.com/esmevane/apread"
 license = "MIT"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
