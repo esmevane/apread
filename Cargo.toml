@@ -1,5 +1,9 @@
 [package]
 name = "apread"
+description = "An activity pub feed reader for the command line"
+homepage = "https://github.com/esmevane/apread"
+repository = "https://github.com/esmevane/apread"
+license = "MIT"
 version = "0.1.0"
 edition = "2021"
 
@@ -12,4 +16,3 @@ edition = "2021"
 inherits = "release"
 debug = true
 split-debuginfo = "packed"
-
