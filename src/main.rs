@@ -2,7 +2,7 @@
 #![deny(missing_docs)]
 
 use clap::Parser;
-use reqwest::header::{HeaderMap, ACCEPT};
+use reqwest::header::ACCEPT;
 use serde::Deserialize;
 use thiserror::Error;
 use tokio;
@@ -175,10 +175,10 @@ enum Item {
 }
 
 impl Item {
-  fn content(&self) -> String {
+  fn markdown_content(&self) -> String {
     match self {
       Self::Boost => String::new(),
-      Self::Post { object, .. } => object.content.clone(),
+      Self::Post { object, .. } => html2md::parse_html(&object.content),
     }
   }
 }
@@ -235,8 +235,16 @@ async fn main() -> Result<(), ApreadErrors> {
     .json::<Page>()
     .await?;
 
+  let options = textwrap::Options::new(80);
+
   for post in page.posts() {
-    println!("{}: {}", handle.id, post.content())
+    println!("{:>15}\n", handle.id);
+
+    for line in textwrap::wrap(&post.markdown_content(), &options) {
+      println!("     {}", line);
+    }
+
+    println!();
   }
 
   Ok(())
